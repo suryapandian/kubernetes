@@ -1,0 +1,16 @@
+# A k8s definition file always has 4 top level fields, these are required files.
+
+apiVersion: v1 #other possible values are apps/v1(replicaset and deployments)
+kind: Pod #type of object, other possible values (ReplicaSet, Deployments, Job, Service)
+metadata: #data about the ojbect, like name, label. Value is in the form of dictionary
+ name: name-of-object
+ labels: #label can have any key value pair, key can be anything
+  app: name-of-app
+spec:
+  containers:
+    - name: nginx-container # '-' before the item indicates that this is the first item in the list
+      image: nginx
+
+
+#  k create -f 03.definition.yaml  
+ 

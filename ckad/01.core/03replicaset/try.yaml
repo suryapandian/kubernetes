@@ -1,0 +1,13 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: new-replica-set
+spec:
+  template:
+    metadata: #data about the ojbect, like name, label. Value is in the form of dictionary
+     name: busybox-pod
+    spec:
+      containers:
+        - name: busybox # '-' before the item indicates that this is the first item in the list
+          image: busybox777
+  replicas: 4
