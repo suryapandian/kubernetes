@@ -7,9 +7,40 @@ metadata: #data about the ojbect, like name, label. Value is in the form of dict
  labels: #label can have any key value pair, key can be anything
   app: name-of-app
 spec:
+  securityContext: #this can also be container level
+    runAsUser: 1000
+    capabilities:
+      add: ["MAC_ADMIN", "CHOWN"]
+  serviceAccountName: dashboard
+  automountServiceAccountToken: false #automatically disable mounting of servie account
   containers:
     - name: nginx-container # '-' before the item indicates that this is the first item in the list
       image: nginx
+      env: #setting environment variables for the pod
+        - name: APP_COLOR
+          value: pink
+        - name: APP_NUMBER
+          valueFrom: 
+            configMapKeyRef:
+              name: app-config #name of configmap
+              key: APP_NUMBER
+        - name: DB_PASSWORD
+          valueFrom:
+            secretRef:
+              name: sec-config
+              key: DB_PASSWORD
+
+      #injecting entire configmap/secret
+      envFrom:
+        - configMapKeyRef:
+           name: app-config #name of configmap //includes all values in configmap into pod
+        - secretRef:
+           name: sec-config
+      volumes:
+        - name: app-config-volume
+          configMap:
+            name: app-config
+      #when we mount secret/configmap from a volume, each attribute is present as a file
 
 
 #  k create -f 03.definition.yaml  

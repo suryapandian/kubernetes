@@ -17,7 +17,11 @@ kubectl run redis --image=redis123 --dry-run=client -o yaml > pod.yaml
 k get svc #gets list of services
 
 
+docker run --name=ubunt-sleeper --entrypoint=sleep ubuntu-sleeper 10
+#will run the docker image `ubuntu-sleeper` replaces the entrypoint with `sleep` command
+#replaces cmd with 10`
 
+docker run -e APP_COLOR=pink simple-web-app-color #setting an environment variable before running a docker image
 
 : '
 The default output format for all kubectl commands is the human-readable plain-text format.

@@ -2,7 +2,8 @@ kubectl run hello-world #used to deploy an application on the cluster
 kubectl run nginx --image=nginx
 kubectl run redis --image=redis123 --dry-run=client -o yaml > pod.yaml
 #this wont create a pod, but will create the def in yaml file. i.e) adding dry-run
-
+k explain pods --recursive #gives diff option to update pod-def file
+k explain pods --recursive | grep envFrom -A3
 kubectl edit pod <pod-name>
 #will open the definition yaml, we can then edit
 
