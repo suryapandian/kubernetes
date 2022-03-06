@@ -16,6 +16,26 @@ spec:
   containers:
     - name: nginx-container # '-' before the item indicates that this is the first item in the list
       image: nginx
+      resources: #if we don't specify it takes the default value if limitrange exists in the namespace
+        requests:
+          memory: "1Gi"
+          cpu: 1
+        limits: 
+          memory: "2Gi" #if it uses more memory pod gets terminated
+          cpu: 2 #cannot use more than this limit,  not possible, so pod does not get terminated
+      readinessProbe:
+        initialDelaySeconds: 6
+        periodSeconds: 60 #how often to probe
+        failureThreshold: 5 #by default after 3 attempts of failure of readinessProbe, pod marked as error
+        httpGet:
+          path: /api/ready
+          port: 8000
+        tcpSocker:
+          port: 3306
+        exec:
+          command:
+            - cat
+            - app/is_ready
       env: #setting environment variables for the pod
         - name: APP_COLOR
           value: pink
@@ -41,7 +61,46 @@ spec:
           configMap:
             name: app-config
       #when we mount secret/configmap from a volume, each attribute is present as a file
-
-
+  tolerations:
+    - key: "app" #must be given in double quotes
+      operator: "Exits" 
+      value: "blue"
+      effect: "NoSchedule"
+  nodeSelector:
+    size: Large #large is in fact label to the node, so we must have labelled nodes
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution: 
+      # can also be preferredDuringSchedulingIgnoreDuringExecution
+      # requiredDuringSchedulingRequiredDuringExecution
+        nodeSelectorTerms:
+          - matchExpressions:
+            - key: size
+              operator: In # (NotIn)
+              values:
+                - Large
+                - Medium
+            - key: size
+              operator: Exists
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: security
+              operator: In
+              values:
+              - S2
+          topologyKey: topology.kubernetes.io/zone
+    podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - store
+            topologyKey: "kubernetes.io/hostname"
 #  k create -f 03.definition.yaml  
  
