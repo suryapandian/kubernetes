@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: service
+metadata:
+  name: service-name
+spec:
+  type: NodePort
+  ports:
+    - targetPort: 80 #application's port
+      port: 80
+      nodePort: 3000 #if we don't provide it takes a valid port in range 30000 to 32767
+  selector:
+    app: app-name
+    type: labels-identifying

@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-watch-wear-service
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  name: rewrite
+  namespace: default
+spec:
+  rules:
+  - http:
+     paths:
+      - path: /watch
+        backend:
+          serviceName: watch-service
+          servicePort: 80
+       - path: /wear
+        backend:
+          serviceName: wear-service
+          servicePort: 80
+      - path: /something(/|$)(.*) #will go to the service:port/whatevergiven only if rewrite is given in metadata
+        pathType: Prefix
+        backend:
+          service:
+            name: http-svc
+            port: 
+              number: 80
+
+# when we don't specifically configure a default rule, by default the request gets routed to
+# a service caleld `default backend`, so it is important to have such a service

@@ -1,0 +1,52 @@
+#Solutions that support nw policy. These solutions must be installed in k8s cluster
+# kube-router, calico, romana, weave-net
+# Flannel does not support network policy
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: clearbank-ledger
+  namespace: core-banking
+  labels:
+    app.kubernetes.io/name: clearbank-ledger
+    app: clearbank-ledger
+spec:
+  podSelector:
+    matchLabels:
+      app: clearbank-ledger
+  policyTypes:
+    - Ingress
+    - Egress
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+            except:
+              - 10.0.0.0/8
+              - 192.168.0.0/16
+              - 172.16.0.0/12
+      ports:
+        - port: 443
+        - protocol: UDP
+          port: 53
+        - protocol: TCP
+          port: 53
+    # Jaeger egress
+    - to:
+        - podSelector:
+            matchLabels:
+              app: jaeger
+          namespaceSelector:
+            matchLabels:
+              name: monitoring
+      ports:
+        - port: 14268
+  ingress:
+    # Prometheus ingress
+    # Allowed to hit metrics endpoint
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: monitoring
+      ports:
+        - port: 3000

@@ -1,0 +1,8 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-watch-service
+spec:
+  backend:
+    serviceName: watch-service
+    servicePort: 80

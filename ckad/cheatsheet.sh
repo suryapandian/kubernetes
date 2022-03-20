@@ -20,6 +20,7 @@ kubectl run redis --image=redis123 --dry-run=client -o yaml > pod.yaml
 
 k get svc #gets list of services
 
+--all-namespaces #gets details from all namespaces
 
 docker run --name=ubunt-sleeper --entrypoint=sleep ubuntu-sleeper 10
 #will run the docker image `ubuntu-sleeper` replaces the entrypoint with `sleep` command
