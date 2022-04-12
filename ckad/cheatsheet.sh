@@ -1,4 +1,5 @@
-grep -i
+
+grep -i #case insensitive search
 
 kubectl get all -A -o yaml #generate  an yaml output with all resources from all namespaces
 

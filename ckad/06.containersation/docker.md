@@ -1,5 +1,12 @@
 ## Docker
 
+Data that is computed during a docker run is not stored anywhere. It gets deleted when the docker container gets terminated.
+If we want the data to be stored persistantly then we have to mount a volume.
+
+Docker has layered architecture, which means that the commands are run in a sequential manner.
+Second command is based off of first command.
+
+All the layers are cached, so after failure is a particular step and when we run again the previous steps are cached and not run again.
 
 ### commands
 

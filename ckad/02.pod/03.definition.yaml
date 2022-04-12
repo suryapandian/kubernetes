@@ -17,6 +17,9 @@ spec:
   containers:
     - name: nginx-container # '-' before the item indicates that this is the first item in the list
       image: nginx
+      volumeMount:
+        - mountPath: /opt
+          name: data-volumne #check `Volumes` below, it have details on the mapping to the host path
       resources: #if we don't specify it takes the default value if limitrange exists in the namespace
         requests:
           memory: "1Gi"
@@ -62,6 +65,17 @@ spec:
           configMap:
             name: app-config
       #when we mount secret/configmap from a volume, each attribute is present as a file
+        - name: data-volumne
+          hostPath:
+            path: /data
+            type: Directory #this is the data folder in the host node. Using such convention is not advisable when we have many nodes
+        - name: data-from-aws
+          awsElasticBlockStore:
+            volumeID: <volume-id>
+            fsType: ext4
+        - name: mypresistentstorage #we can also do the same for deployments, replicasets etc...
+          persistentVolumeClaim:
+            claimName: pvc-sample
   tolerations:
     - key: "app" #must be given in double quotes
       operator: "Exits" 

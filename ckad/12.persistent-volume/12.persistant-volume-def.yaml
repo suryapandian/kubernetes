@@ -1,0 +1,17 @@
+# PVC - Persistant Volume Claim
+
+# Instead of mounting volumes on nodes. 
+#A sys admin will allocate large chunk of volume and then the devs can use part of it.
+# ad admin creates persistant volume and the user creates persistant volume claims
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-v1
+spec:
+  accessMode:
+    - ReadWriteOnce # can also be ReadOnlyMany, ReadWriteOnce, ReadWriteMany
+  capacity:
+    storage: 1Gi
+  hostPath:
+    path: /tmp/data #node's local directory. this shouldn't be used in production

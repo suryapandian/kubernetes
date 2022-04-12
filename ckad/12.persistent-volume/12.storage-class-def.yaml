@@ -1,0 +1,8 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: google-storage-class
+provisioner: kubernetes.io/gcp-pod  #can be other providers as well aws etc...
+parameters:
+type: pd-standard #pd-ssd
+replication-type: none 

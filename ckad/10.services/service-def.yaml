@@ -11,3 +11,4 @@ spec:
   selector:
     app: app-name
     type: labels-identifying
+  clusterIP: none #when this attribute is set, a headless service is created. i.e) the service will have no IP of it's own but will be used to created IP for other services. Useful to create IPs for pods in stateful sets.
