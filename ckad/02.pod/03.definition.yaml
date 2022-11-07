@@ -9,7 +9,7 @@ metadata: #data about the ojbect, like name, label. Value is in the form of dict
 spec:
   restartPolicy: Never
   securityContext: #this can also be container level
-    runAsUser: 1000
+    runAsUser: 1000 #0 means root user
     capabilities:
       add: ["MAC_ADMIN", "CHOWN"]
   serviceAccountName: dashboard
@@ -34,7 +34,7 @@ spec:
         httpGet:
           path: /api/ready
           port: 8000
-        tcpSocker:
+        tcpSocket:
           port: 3306
         exec:
           command:

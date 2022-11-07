@@ -17,3 +17,6 @@ containers:
               name: secret-config-name
               key: secret_key_name%      
 ```
+
+
+` kubectl create secret tls test-tls --key="tls.key" --cert="tls.crt"` #create tls secret

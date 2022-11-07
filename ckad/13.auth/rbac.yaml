@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: developer
+  namespace: core-banking 
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["list", "get", "create", "update"]
+    resourceNames: ["blue", "green"] #option attribute restricts to these pods alone
+  - apiGroups: [""]
+    resources: ["ConfigMap"]
+    verbs: ["create"]
+
+
+# we can then create the role using `k create -f developer-role.yaml` 
+# `k auth can-i create deployments` 
+# `k auth can-i delete nodes` 
+# `k auth can-i create deployments --as dev-user`

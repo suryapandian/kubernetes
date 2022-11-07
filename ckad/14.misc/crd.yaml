@@ -1,0 +1,28 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition 
+metadata:
+  name: flightticket.com
+spec:
+  scope: Namespaced
+  groups: apigroups
+  names:
+   kind: FlightTicket
+   singular: flightticket
+   plural: flighttickets
+   shortnames:
+    - ft
+  versions:
+    - name: v1
+      served: true #stored through api server
+      storage: true  # this version is served through storage version
+  schema:
+   openAPIV3Schema:
+     type: object
+     properties:
+      from:
+       type: string
+      to:
+       type: string
+      number:
+       type: integer 
+
