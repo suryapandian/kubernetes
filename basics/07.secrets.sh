@@ -1,5 +1,5 @@
 kubectl create secret generic secret-config-name --from-literal=secret_key=secret_value
-
+kubectl create secret generic my-secret --from-literal=key1=supersecret --from-literal=key2=topsecret
 kubectl get secrets
 
 kubectl get secret secret_key_name -o yaml //here you can see the secret and its value that is encoded

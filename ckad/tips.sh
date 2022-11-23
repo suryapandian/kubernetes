@@ -1,7 +1,10 @@
 #vimrc
 
 set nu # set numbers
-set tabstop=2 shiftwidth=2 expandtab # use 2 spaces instead of tab
+set tabstop=2 shiftwidth=2 expandtab
+# expandtab - converts tab into space
+# use 2 spaces instead of tab
+#shiftwidth: number of spaces inserted for indendation
 set ai # autoindent: when go to new line keep same indentation
 
 #bashrc
