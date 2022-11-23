@@ -1,4 +1,3 @@
-
 kubectl get replicas 
 kubectl get replicaset
 

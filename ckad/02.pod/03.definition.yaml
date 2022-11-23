@@ -93,7 +93,7 @@ spec:
             - key: size
               operator: In # (NotIn)
               values:
-                - Large
+                - Large #these are labels of the node
                 - Medium
             - key: size
               operator: Exists

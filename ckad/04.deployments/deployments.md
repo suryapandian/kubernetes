@@ -4,6 +4,23 @@ To revert, that is why we call the reverts as rollbacks
 
 When we create a new deployment, a rollout is created. A new rollout creates a new deployment-revision.
 
+```
+kubectl create -f helloworld.yaml —record #records the rollout history
+
+kubectl set image deployment/navbar-development helloworld=karthequian/helloworld:blue #	the same deployment replaced with new image, here the deployment name is navbar-development
+
+kubectl rollout history deployment/deployment-name # we can see deployment history
+
+kubectl rollout undo deployment/deployment-name # will revert the changes
+
+kubectl rollout undo deployment/deployment-name —to-revision=1 #here is the number of revision that we see in history
+
+#We can also describe deployment, services etc…
+
+kubectl describe deployment deployment-name
+```
+
+
 `k create -f deployment-definition.yml`
 
 `k rollout status deployment/deployment-name`
@@ -12,10 +29,6 @@ When we create a new deployment, a rollout is created. A new rollout creates a n
 `k rollout history deployment/deployment-name`
 
 When a new deployment is created, first we create a new replica set which then creates the pods for the new deployment.
-
-To undo deployment
-
-`k rollout undo deployment/deployment-name`
 
 
 ### Types of deployment strategy

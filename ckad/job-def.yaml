@@ -6,6 +6,7 @@
 # A job is used to run a set of pods to perform a given task to completion.
 
 
+#Jobs are constructs that run a deployment once, the output of the job is kept around until it is removed
 
 
 # k create job job-name --image nginx --dry-run=client -o yaml

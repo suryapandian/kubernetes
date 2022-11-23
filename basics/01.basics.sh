@@ -1,8 +1,6 @@
 kubectl get all # gets all pods
 kubectl get rs # gets all replica sets
 
-kubectl logs pod-name
-
 kubectl exec -it deployment-name #login to the terminal
 
 kubectl exec -it  deployment-name -c pod-name /bin/bash  # if pods for a deployment are present in multiple container 

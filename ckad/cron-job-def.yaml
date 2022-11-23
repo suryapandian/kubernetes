@@ -15,3 +15,5 @@ spec:
               image: ubuntu
               command: ['expr', '3', '+', '2']
           restartPolicy: Never
+
+# kubectl edit cronjobs/cron-name //edit and update suspend to true to stop a cronjob
