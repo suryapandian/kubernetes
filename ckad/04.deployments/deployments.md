@@ -13,13 +13,8 @@ kubectl rollout history deployment/deployment-name # we can see deployment histo
 
 kubectl rollout undo deployment/deployment-name # will revert the changes
 
-kubectl rollout undo deployment/deployment-name —to-revision=1 #here is the number of revision that we see in history
-
-#We can also describe deployment, services etc…
-
-kubectl describe deployment deployment-name
+kubectl rollout undo deployment/deployment-name -—to-revision=1 #here is the number of revision that we see in history
 ```
-
 
 `k create -f deployment-definition.yml`
 
@@ -29,7 +24,6 @@ kubectl describe deployment deployment-name
 `k rollout history deployment/deployment-name`
 
 When a new deployment is created, first we create a new replica set which then creates the pods for the new deployment.
-
 
 ### Types of deployment strategy
 

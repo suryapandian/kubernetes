@@ -60,22 +60,25 @@ spec:
            name: app-config #name of configmap //includes all values in configmap into pod
         - secretRef:
            name: sec-config
-      volumes:
-        - name: app-config-volume
-          configMap:
-            name: app-config
-      #when we mount secret/configmap from a volume, each attribute is present as a file
-        - name: data-volumne
-          hostPath:
-            path: /data
-            type: Directory #this is the data folder in the host node. Using such convention is not advisable when we have many nodes
-        - name: data-from-aws
-          awsElasticBlockStore:
-            volumeID: <volume-id>
-            fsType: ext4
-        - name: mypresistentstorage #we can also do the same for deployments, replicasets etc...
-          persistentVolumeClaim:
-            claimName: pvc-sample
+    volumes:
+      - name: app-config-volume
+        configMap:
+          name: app-config
+    #when we mount secret/configmap from a volume, each attribute is present as a file
+      - name: data-volumne
+        hostPath:
+          path: /data
+          type: Directory #this is the data folder in the host node. Using such convention is not advisable when we have many nodes
+      - name: data-from-aws
+        awsElasticBlockStore:
+          volumeID: <volume-id>
+          fsType: ext4
+      - name: mypresistentstorage #we can also do the same for deployments, replicasets etc...
+        persistentVolumeClaim:
+          claimName: pvc-sample
+      - name: secret-name
+        secret:
+          secretName: some-fancy-name
   tolerations:
     - key: "app" #must be given in double quotes
       operator: "Exits" 
