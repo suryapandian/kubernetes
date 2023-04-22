@@ -11,7 +11,6 @@ x% of traffic is sent to old deployment, (100-x)% of traffic is sent to new depl
 
 where x is a usually greater than 50
 
-
 ## Recreate
 
 ## Rolling update

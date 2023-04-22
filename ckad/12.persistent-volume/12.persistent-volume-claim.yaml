@@ -11,3 +11,8 @@ spec:
   storageClassName: google-storage-class
   persistentVolumeReclaimPolicy: Retain 
   #can also be set as Delete or Recycle that helps k8s know if the PV should be retained,deleted or recycled.
+  selector:
+    matchLabels:
+      release: "stable"
+    matchExpressions:
+      - {key: environment, operator: In, values: [dev]}

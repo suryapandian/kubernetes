@@ -14,10 +14,11 @@ spec:
       add: ["MAC_ADMIN", "CHOWN"]
   serviceAccountName: dashboard
   automountServiceAccountToken: false #automatically disable mounting of servie account
+  terminationGracePeriodSeconds: 10
   containers:
     - name: nginx-container # '-' before the item indicates that this is the first item in the list
       image: nginx
-      volumeMount:
+      volumeMounts:
         - mountPath: /opt
           name: data-volumne #check `Volumes` below, it have details on the mapping to the host path
       resources: #if we don't specify it takes the default value if limitrange exists in the namespace
@@ -50,13 +51,13 @@ spec:
               key: APP_NUMBER
         - name: DB_PASSWORD
           valueFrom:
-            secretRef:
+            secretKeyRef:
               name: sec-config
               key: DB_PASSWORD
 
       #injecting entire configmap/secret
       envFrom:
-        - configMapKeyRef:
+        - configMapRef:
            name: app-config #name of configmap //includes all values in configmap into pod
         - secretRef:
            name: sec-config
@@ -79,6 +80,10 @@ spec:
       - name: secret-name
         secret:
           secretName: some-fancy-name
+      - name: cache-volume
+        emptyDir:
+          sizeLimit: 500Mi
+
   tolerations:
     - key: "app" #must be given in double quotes
       operator: "Exits" 

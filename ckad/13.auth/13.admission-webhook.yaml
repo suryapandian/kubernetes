@@ -10,6 +10,7 @@ webhooks:
       namespace: "webhook-example"
       name: "svc-name" 
     caBundle: "blabbaaallllasasdfadsf"
+  #this is where the webhook server runs, if this passes then allow the rules that are present here
    rules:
     - apiGroups: [""]
       apiVersion: ["v1"]

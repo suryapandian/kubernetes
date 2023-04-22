@@ -1,9 +1,7 @@
 k create -f rep-controller-definition.yaml
-k get replicationcontroller
-k get pods
 
 k create -f rep-set-def.yaml
-k get replicasets
+k get rs
 k get pods
 
 # after creating the replicaset if we need to change the number of max pods
