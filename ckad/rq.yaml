@@ -1,3 +1,4 @@
+#ResourceQuota is for limiting the total resource consumption of a namespace
 apiVersion: v1
 kind: ResourceQuota
 metadata:
@@ -8,4 +9,10 @@ spec:
       cpu: "1"
       memory: 1G
       pods: "2"
+      configmaps: "10" 
+      persistentvolumeclaims: "4" 
+      replicationcontrollers: "20" 
+      secrets: "10" 
+      services: "10"
+
 status: {}

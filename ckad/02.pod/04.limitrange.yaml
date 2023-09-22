@@ -8,4 +8,12 @@ spec:
       memory: 512Mi
     defaultRequest:
       memory: 256Mi
+    max:
+      cpu: 1
+      memory: 100Mi
+    min:
+      cpu: 2
+      memory: 50Mi
     type: Container
+
+#if we create a limit ranger it is only applicable for pods that will be created after we have set the limit range. is not applicable for existing pods

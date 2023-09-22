@@ -13,5 +13,5 @@ kubectl get nodes --help #Lists all possible commands wrt nodes
  #then build the image and use the image in the next step
 
 kubectl create deployment first-deployment --image=web
-
+kubectl create daemonset daemonset-example --image=redis
 kubectl get deployments

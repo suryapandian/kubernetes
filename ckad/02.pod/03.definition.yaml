@@ -95,7 +95,7 @@ spec:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution: 
       # can also be preferredDuringSchedulingIgnoreDuringExecution
-      # requiredDuringSchedulingRequiredDuringExecution
+      # requiredDuringSchedulingRequiredDuringExecution //this is not present now, but in future this might come up
         nodeSelectorTerms:
           - matchExpressions:
             - key: size

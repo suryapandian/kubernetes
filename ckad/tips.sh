@@ -28,9 +28,10 @@ alias kx="kubectl delete --grace-period=0 --force"
 alias kde="kubectl describe"
 alias kg="kubectl get"
 alias kc="kubectl create"
-alias kr="kubectl replace -f"
+alias kr="kubectl replace --force -f" #force kills and creates if it is not replacable
 complete -F __start_kubectl kD
 
+k run --help #VERY VERY IMPORTANT gives all the arguments that is valid for k run
 #
 # In the following, $1 is the filepath of a yaml k8s object.
 
